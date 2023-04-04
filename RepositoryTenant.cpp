@@ -66,3 +66,18 @@ void RepositoryTenant::deleteItem(int idd)
 		else std::cout << "Item has deleted\n";
 		sqlite3_finalize(stmt);
 }
+
+void RepositoryTenant::updateItem(int id, Tenant tn)
+{
+	sqlite3_stmt* stmt;
+	std::string nam = tn.getName();
+	const char* name = nam.c_str();
+	std::string str = "UPDATE tenants SET name = ? WHERE id = ?";
+	sqlite3_prepare_v2(_db, str.c_str(), -1, &stmt, 0);
+	sqlite3_bind_text(stmt, 1 , name, -1, SQLITE_TRANSIENT);
+	sqlite3_bind_int(stmt, 2, id);
+	auto rs = sqlite3_step(stmt);
+	if (rs != SQLITE_DONE) std::cout << "There is an Error\t" << rs << "\n";
+	else std::cout << "Item has updated\n";
+	sqlite3_finalize(stmt);
+}

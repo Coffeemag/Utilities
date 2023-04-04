@@ -19,14 +19,15 @@ void ControllerTenant::interact()
 			viewt->prompt("Enter id item to delete\n");
 			repo->deleteItem(viewt->getInt());
 		}; break;
-		case 3:std::cout<<"Here will be Update\n"; break;
+		case 3: {viewt->prompt("Do you want to Change Neme of Tenant?");
+			viewt->prompt("Enter id this Item");
+			auto ids = viewt->getInt();
+			repo->updateItem(ids, viewt->getTenant());
+		}; break;
 		
 		case 4:cl = 0; break;
 		
 		default: std::cout << "You have entered incorrect number";
 		}
-		
-		
-		
 	}
 }

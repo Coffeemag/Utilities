@@ -17,6 +17,8 @@ public:
 	void showItems() const;
 
 	void deleteItem(int id);
+
+	void updateItem(int id, Tenant tn);
 	
 };
 
